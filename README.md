@@ -2,8 +2,8 @@
 
 🚀 Welcome to **SQL Database Designs**, a collection of real-world **database schema examples** for various business applications. This repository helps you **practice database design** and test your skills by converting textual project descriptions into fully structured **SQL databases**.
 
-## 🏗 What You'll Learn
-In these projects, you'll follow a structured process to **build a complete database**:
+## 🏗 What You'll Find
+In these projects, you'll Find a structured process to **build a complete database**:
 1. **Read & analyze the project description** 📝  
 2. **Prepare an Entity-Relationship Diagram (ERD)** 📊  
 3. **Convert the ERD into a structured database schema**  
