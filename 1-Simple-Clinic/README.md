@@ -85,14 +85,19 @@ Start by identifying key entities and relationships from the text:
 - An **Appointment** can have a **Medical Record**.  
 
 ---
+### Step 3: Designing ERD
+![Demo](./simpleclinicgif.gif)
 
-### Step 3: Designing the Relational Schema
+#### The final Result :
+![png](simpleclinicpng.png)
+
+### Step 4: Designing the Relational Schema
 [Watch the video](./simpleclincerd.mp4)
 
 ![Simple Clinic Management System ERD](./simple_clinic-1.PNG)
 ---
 
-### Step 4: Writing SQL Code
+### Step 5: Writing SQL Code
 
 The SQL script to create the tables and relationships:
 
