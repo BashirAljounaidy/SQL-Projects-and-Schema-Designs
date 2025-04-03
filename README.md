@@ -16,19 +16,19 @@ Each project provides **hands-on experience** in **database normalization, SQL s
 ## 📌 Projects Included
 Each project consists of **Entity-Relationship Diagrams (ERD)**, **SQL scripts**, and **sample queries** to help you **practice database design and SQL development**.
 
-1. **Simple Clinic Management** 🏥  
+1. **[Simple Clinic Management 🏥](./1-Simple-Clinic)**  
    - A database system for managing patients, appointments, and doctors.
    
-2. **Library Management System** 📚  
+2. **[Library Management System 📚](./2-Simple-Library)**  
    - Tracks books, authors, borrowers, and loan records.
    
-3. **Karate Club Membership System** 🥋  
+3. **[Karate Club Membership System 🥋](./3-Karate-Club)**  
    - Manages students, instructors, class schedules, and payments.
    
-4. **Car Rental System** 🚗  
+4. **[Car Rental System 🚗](./4-Car-Rental)**  
    - Handles vehicle inventory, customer bookings, and rental transactions.
    
-5. **Online Store (E-Commerce)** 🛒  
+5. **[Online Store (E-Commerce) 🛒](./5-Online-Store)**  
    - A relational database for managing customers, products, orders, and payments.
 
 ---
