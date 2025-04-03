@@ -1,7 +1,18 @@
 # 📊 Simple Clinic Management System - Database Design
 
+## Table of Contents
+
+1. [Project Overview](#1-project-overview)  
+2. [Converting Text Requirements to Database Design](#2-converting-text-requirements-to-database-design)  
+   - [Step 1: Analyzing the Requirements](#step-1-analyzing-the-requirements)  
+   - [Step 2: Identifying Relationships](#step-2-identifying-relationships)  
+   - [Step 3: Designing the Relational Schema](#step-3-designing-the-relational-schema)  
+   - [Step 4: Writing SQL Code](#step-4-writing-sql-code)  
+
+---
+![Simple Clinic Management System ERD](./simple_clinic-1.PNG)
 ## 1. Project Overview
-![simple_clinc](simple_clinic-1.PNG)
+
 
 This document presents the database design for a **Simple Clinic Management System**. The purpose is to create a structured, scalable, and normalized database that can handle patient, doctor, appointment, medical record, prescription, and payment information efficiently.
 
@@ -24,47 +35,52 @@ The process of converting textual project requirements into a structured databas
 Start by carefully reading and breaking down the given text to identify key entities and relationships. Here’s the detailed analysis of each entity and relationship:
 
 #### Patients:
-- **Entity Identified:** Patient
-- **Attributes:** patient_id (PK), name, date_of_birth, gender, phone_number, email, address
+- **Entity Identified:** Patient  
+- **Attributes:** patient_id (PK), name, date_of_birth, gender, phone_number, email, address  
 
 #### Doctors:
-- **Entity Identified:** Doctor
-- **Attributes:** doctor_id (PK), name, specialization, date_of_birth, gender, phone_number, email, address
+- **Entity Identified:** Doctor  
+- **Attributes:** doctor_id (PK), name, specialization, date_of_birth, gender, phone_number, email, address  
 
 #### Appointments:
-- **Entity Identified:** Appointment
-- **Attributes:** appointment_id (PK), patient_id (FK), doctor_id (FK), appointment_date_time, appointment_status, medical_record_id (FK), payment_id (FK)
+- **Entity Identified:** Appointment  
+- **Attributes:** appointment_id (PK), patient_id (FK), doctor_id (FK), appointment_date_time, appointment_status, medical_record_id (FK), payment_id (FK)  
 
 #### Medical Records:
-- **Entity Identified:** Medical Record
-- **Attributes:** medical_record_id (PK), visit_description, diagnosis, additional_notes
+- **Entity Identified:** Medical Record  
+- **Attributes:** medical_record_id (PK), visit_description, diagnosis, additional_notes  
 
 #### Prescriptions:
-- **Entity Identified:** Prescription
-- **Attributes:** prescription_id (PK), medical_record_id (FK), medication_name, dosage, frequency, start_date, end_date, special_instructions
+- **Entity Identified:** Prescription  
+- **Attributes:** prescription_id (PK), medical_record_id (FK), medication_name, dosage, frequency, start_date, end_date, special_instructions  
 
 #### Payments:
-- **Entity Identified:** Payment
-- **Attributes:** payment_id (PK), payment_date, payment_method, amount_paid, additional_notes
+- **Entity Identified:** Payment  
+- **Attributes:** payment_id (PK), payment_date, payment_method, amount_paid, additional_notes  
 
 #### Persons:
-- **Entity Identified:** Person
-- **Attributes:** person_id (PK), name, date_of_birth, gender, phone_number, email, address
+- **Entity Identified:** Person  
+- **Attributes:** person_id (PK), name, date_of_birth, gender, phone_number, email, address  
+
+---
 
 ### Step 2: Identifying Relationships
-: Identifying Relationships
 
 Next, identify how these entities relate to one another. For example:
 
-- A **Patient** can have multiple **Appointments**.
-- A **Doctor** can attend multiple **Appointments**.
-- An **Appointment** can have a **Medical Record**.
+- A **Patient** can have multiple **Appointments**.  
+- A **Doctor** can attend multiple **Appointments**.  
+- An **Appointment** can have a **Medical Record**.  
+
+---
 
 ### Step 3: Designing the Relational Schema
 
 After identifying entities and relationships, we draft the **Relational Schema** to represent the tables, primary keys, and foreign key relationships clearly.
 
-![simple_clinc](simple_clinic-1.PNG)
+![Relational Schema Diagram](./simple_clinic-1.PNG)
+
+---
 
 ### Step 4: Writing SQL Code
 
@@ -128,5 +144,3 @@ CREATE TABLE Payments (
     AdditionalNotes NVARCHAR(200)
 );
 ```
-
----
