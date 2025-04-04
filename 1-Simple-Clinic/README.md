@@ -92,8 +92,6 @@ Start by identifying key entities and relationships from the text:
 ![png](simpleclinicpng.png)
 
 ### Step 4: Designing the Relational Schema
-[Watch the video](./simpleclincerd.mp4)
-
 ![Simple Clinic Management System ERD](./simple_clinic-1.PNG)
 ---
 
