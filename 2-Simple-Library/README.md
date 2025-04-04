@@ -1,53 +1,145 @@
-# 📊 SQL Database Design Projects
+# 📚 Simple Library Management System - Database Design
 
-🚀 Welcome to **SQL Database Designs**, a collection of real-world **database schema examples** for various business applications. This repository helps you **practice database design** and test your skills by converting textual project descriptions into fully structured **SQL databases**.
+## Table of Contents
 
-## 🏗 What You'll Find
-In these projects, you'll Find a structured process to **build a complete database**:
-1. **Read & analyze the project description** 📝  
-2. **Prepare an Entity-Relationship Diagram (ERD)** 📊  
-3. **Convert the ERD into a structured database schema**  
-4. **Write the SQL implementation** in multiple ways (normalized tables, constraints, relationships)  
+1. [Project Overview](#1-project-overview)  
+2. [Requirements](#2-requirements)  
+3. [Converting Text Requirements to Database Design](#3-converting-text-requirements-to-database-design)  
+   - [Step 1: Analyzing the Requirements](#step-1-analyzing-the-requirements)  
+   - [Step 2: Identifying Relationships](#step-2-identifying-relationships)  
+   - [Step 3: Designing the Relational Schema](#step-3-designing-the-relational-schema)  
+   - [Step 4: Writing SQL Code](#step-4-writing-sql-code)  
 
-Each project provides **hands-on experience** in **database normalization, SQL scripting, and real-world business logic**.
+---
+![Simple Library Management System ERD](./library_management.png)
+
+## 1. Project Overview
+
+This document presents the database design for a **Simple Library Management System**. The purpose is to create a structured, scalable, and normalized database that can handle book management, user management, borrowing, returns, reservations, and fine management efficiently.
+
+### Objectives
+
+- Efficiently store and manage book data.
+- Track book availability and manage multiple copies.
+- Maintain user records and library card information.
+- Handle borrowing, returns, and associated fine management.
+- Manage reservations and hold requests fairly.
+
+---
+## 2. Requirements
+Create Relational Schema for the following project:
+Here are the database requirements for a simple library management system:
+
+```
+1. Book Management:
+• Store and manage information about books, including title, author(s), ISBN, publication date, genre, and additional details.
+• Track availability status of book copies, indicating whether they are available for borrowing or checked out by users.
+• Manage multiple copies of a book, each with a unique identifier (copy ID).
+
+2. User Management:
+• Maintain records of library users, including their names, contact information, and library card numbers.
+
+3. Borrowing and Returns:
+• Enable users to borrow book copies from the library.
+• Track borrowing records, including the book copy borrowed, user information, borrowing date, and due date.
+• Handle the return process, updating the availability status of book copies.
+• Check for any fines or penalties associated with late returns or damaged book copies.
+
+4. Holds and Reservations:
+• Allow users to place holds or reservations on book copies that are currently checked out.
+• Manage the order of reservations to ensure fairness.
+
+5. Fine Management:
+• Calculate and manage fines or penalties for late returns of book copies.
+• Keep track of the fine amount owed by each user.
+• Maintain the payment status to track whether fines have been paid or are still pending.
+```
+
+## 3. Converting Text Requirements to Database Design
+
+### Step 1: Analyzing the Requirements
+
+Start by identifying key entities and relationships from the text:
+
+- **Books:** BookID (PK), Title, ISBN, PublicationDate, Genre, AdditionalDetails
+- **BookCopies:** CopyID (PK), BookID (FK), AvailabilityStatus
+- **Users:** UserID (PK), Name, ContactInformation, LibraryCardNumber
+- **BorrowingRecords:** BorrowingRecordID (PK), UserID (FK), CopyID (FK), BorrowingDate, DueDate, ActualReturnDate
+- **Reservations:** ReservationID (PK), UserID (FK), CopyID (FK), ReservationDate
+- **Fines:** FineID (PK), UserID (FK), BorrowingRecordID (FK), NumberOfLateDays, FineAmount, PaymentStatus
+- **Settings:** DefaultBorrowDays, DefaultFinePerDay
 
 ---
 
-## 📌 Projects Included
-Each project consists of **Entity-Relationship Diagrams (ERD)**, **SQL scripts**, and **sample queries** to help you **practice database design and SQL development**.
+### Step 2: Identifying Relationships
 
-1. **[Simple Clinic Management 🏥](./1-Simple-Clinic)**  
-   - A database system for managing patients, appointments, and doctors.
-   
-2. **[Library Management System 📚](./2-Simple-Library)**  
-   - Tracks books, authors, borrowers, and loan records.
-   
-3. **[Karate Club Membership System 🥋](./3-Karate-Club)**  
-   - Manages students, instructors, class schedules, and payments.
-   
-4. **[Car Rental System 🚗](./4-Car-Rental)**  
-   - Handles vehicle inventory, customer bookings, and rental transactions.
-   
-5. **[Online Store (E-Commerce) 🛒](./5-Online-Store)**  
-   - A relational database for managing customers, products, orders, and payments.
+- A **User** can borrow multiple **BookCopies**.  
+- A **Book** can have multiple **Copies**.  
+- A **BorrowingRecord** can be linked to **Fines**.  
+- A **User** can place multiple **Reservations**.  
 
 ---
+### Step 3: Designing ERD
+![Demo](./simpleclinicgif.gif)
 
-## 🛠 Database Design Features
-✅ **Step-by-step database modeling** (from concept to SQL implementation)  
-✅ **Hands-on practice with relational database design**  
-✅ **Stored Procedures & Views for real-world scenarios**  (Not Yet)
-✅ **Optimized Indexing & Query Performance**  (Not Yet)
-✅ **Sample Queries for Reporting & Analytics**   (Not Yet)
+#### The final Result :
+![png](LibraryManagment.PNG)
 
----
+### Step 4: Designing the Relational Schema
+![Simple Clinic Management System ERD](./LibraryManagment.PNG)
+```
+-- Step 1: Create all tables without foreign keys
 
-## 👤 Author & Contact
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(255),
+    ISBN NVARCHAR(50),
+    PublicationDate DATE,
+    Genre NVARCHAR(50),
+    AdditionalDetails NVARCHAR(MAX)
+);
 
-**Created by:** [Bashir Aljounaidy]  
-🔗 **GitHub:** [github.com/BashirAljounaidy](https://github.com/BashirAljounaidy)  
-🌐 **LinkedIn:** [linkedin.com/in/bashiraljounaidy](https://linkedin.com/in/bashiraljounaidy)  
+CREATE TABLE BookCopies (
+    CopyID INT PRIMARY KEY IDENTITY(1,1),
+    BookID INT,
+    AvailabilityStatus BIT
+);
 
-If you find this repository helpful, feel free to ⭐ **star this repo** and **follow me** for more **SQL & database design projects**!
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100),
+    ContactInformation NVARCHAR(255),
+    LibraryCardNumber NVARCHAR(50)
+);
 
----
+CREATE TABLE BorrowingRecords (
+    BorrowingRecordID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT,
+    CopyID INT,
+    BorrowingDate DATE,
+    DueDate DATE,
+    ActualReturnDate DATE
+);
+
+CREATE TABLE Reservations (
+    ReservationID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT,
+    CopyID INT,
+    ReservationDate DATE
+);
+
+CREATE TABLE Fines (
+    FineID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT,
+    BorrowingRecordID INT,
+    NumberOfLateDays SMALLINT,
+    FineAmount DECIMAL(10, 2),
+    PaymentStatus BIT
+);
+
+CREATE TABLE Settings (
+    DefaultBorrowDays TINYINT,
+    DefaultFinePerDay TINYINT
+);
+```
+
