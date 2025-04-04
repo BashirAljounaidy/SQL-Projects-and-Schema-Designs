@@ -11,7 +11,7 @@
    - [Step 4: Writing SQL Code](#step-4-writing-sql-code)  
 
 ---
-![Simple Library Management System ERD](./library_management.png)
+![Simple Library Management System ERD](./LibraryManagment.PNG)
 
 ## 1. Project Overview
 
