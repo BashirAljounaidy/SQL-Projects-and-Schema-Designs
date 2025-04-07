@@ -88,8 +88,7 @@ Start by identifying key entities and relationships from the text:
 ### Step 4: Designing the Relational Schema
 ![Simple Clinic Management System ERD](./LibraryManagment.PNG)
 ```
--- Step 1: Create all tables without foreign keys
-
+-- Books Table
 CREATE TABLE Books (
     BookID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255),
@@ -99,12 +98,14 @@ CREATE TABLE Books (
     AdditionalDetails NVARCHAR(MAX)
 );
 
+-- Book Copies Table
 CREATE TABLE BookCopies (
     CopyID INT PRIMARY KEY IDENTITY(1,1),
     BookID INT,
     AvailabilityStatus BIT
 );
 
+-- Users Table
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(100),
@@ -112,6 +113,7 @@ CREATE TABLE Users (
     LibraryCardNumber NVARCHAR(50)
 );
 
+-- Borrowing Records Table
 CREATE TABLE BorrowingRecords (
     BorrowingRecordID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT,
@@ -121,6 +123,7 @@ CREATE TABLE BorrowingRecords (
     ActualReturnDate DATE
 );
 
+-- Reservations Table
 CREATE TABLE Reservations (
     ReservationID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT,
@@ -128,6 +131,7 @@ CREATE TABLE Reservations (
     ReservationDate DATE
 );
 
+-- Fines Table
 CREATE TABLE Fines (
     FineID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT,
@@ -137,9 +141,36 @@ CREATE TABLE Fines (
     PaymentStatus BIT
 );
 
+-- Settings Table
 CREATE TABLE Settings (
     DefaultBorrowDays TINYINT,
     DefaultFinePerDay TINYINT
 );
+-- Add Foreign Keys to BookCopies
+ALTER TABLE BookCopies
+ADD CONSTRAINT FK_BookCopies_BookID
+FOREIGN KEY (BookID) REFERENCES Books(BookID);
+
+-- Add Foreign Keys to BorrowingRecords
+ALTER TABLE BorrowingRecords
+ADD CONSTRAINT FK_BorrowingRecords_UserID
+FOREIGN KEY (UserID) REFERENCES Users(UserID),
+ADD CONSTRAINT FK_BorrowingRecords_CopyID
+FOREIGN KEY (CopyID) REFERENCES BookCopies(CopyID);
+
+-- Add Foreign Keys to Reservations
+ALTER TABLE Reservations
+ADD CONSTRAINT FK_Reservations_UserID
+FOREIGN KEY (UserID) REFERENCES Users(UserID),
+ADD CONSTRAINT FK_Reservations_CopyID
+FOREIGN KEY (CopyID) REFERENCES BookCopies(CopyID);
+
+-- Add Foreign Keys to Fines
+ALTER TABLE Fines
+ADD CONSTRAINT FK_Fines_UserID
+FOREIGN KEY (UserID) REFERENCES Users(UserID),
+ADD CONSTRAINT FK_Fines_BorrowingRecordID
+FOREIGN KEY (BorrowingRecordID) REFERENCES BorrowingRecords(BorrowingRecordID);
+
 ```
 
